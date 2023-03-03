@@ -3,31 +3,34 @@ import styles from './index.css';
 
 const initialState = {
   count: 0,
-  countTotal: 154
+  countTotal: 154,
+  isClicked: false
 }
 const MediumClap = () => {
+  const MAXIMUM_USER_CLAPS = 50;
   const [clapState, setClapState] = useState(initialState);
-  const {count, countTotal} = clapState;
+  const {count, countTotal, isClicked} = clapState;
 
   const handleClapCount = () => {
     setClapState(prevState => ({
-      count: prevState.count+1,
-      countTotal: prevState.countTotal+1
+      isClicked: true,
+      count: Math.min(prevState.count + 1, MAXIMUM_USER_CLAPS),
+      countTotal: prevState.count < MAXIMUM_USER_CLAPS ? prevState.countTotal + 1 :  prevState.countTotal
     }))
   }
 
 
   return <button className={styles.clap} onClick={handleClapCount}>
-    <ClapIcon />
+    <ClapIcon isClicked={isClicked}/>
     <ClapCount count={count}/>
     <CountTotal countTotal={countTotal}/>
   </button>
 }
 
-const ClapIcon = () => {
+const ClapIcon = ({isClicked}) => {
   return <span>
       <svg
-        className={styles.icon}
+        className={`${styles.icon} ${isClicked && styles.checked}`}
         xmlns='http://www.w3.org/2000/svg'
         viewBox='-549 338 100.1 125'
       >
