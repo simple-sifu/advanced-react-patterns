@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './index.css';
 
 const MediumClap = () => {
-  return <button>
+  return <button className={styles.clap}>
     <ClapIcon />
     <ClapCount />
     <CountTotal />
@@ -11,6 +12,7 @@ const MediumClap = () => {
 const ClapIcon = () => {
   return <span>
       <svg
+        className={styles.icon}
         xmlns='http://www.w3.org/2000/svg'
         viewBox='-549 338 100.1 125'
       >
@@ -21,13 +23,13 @@ const ClapIcon = () => {
 }
 
 const ClapCount = ({count}) => {
-  return <span>
+  return <span className={styles.count}>
    + {count}
   </span>
 }
 
 const CountTotal = ({countTotal}) => {
-  return <span>
+  return <span className={styles.total}>
     { countTotal }
   </span>
 }
