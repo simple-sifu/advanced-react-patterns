@@ -33,7 +33,8 @@ const withClapAnimation = WrappedComponent => {
         el: '#clapCountTotal',
         opacity: {0: 1},
         delay: (3 * tlDuration)/2,  
-        duration: tlDuration
+        duration: tlDuration,
+        y: {0:-3}
       })
 
       const clap = document.getElementById('clap')

@@ -63,7 +63,8 @@
   text-align: center;
   left: 0;
   top: -22px;
-  color: #bdc3c7;
+  /* color: #bdc3c7; */
+  color: black;
 }
 
 /* Clap Icon */
