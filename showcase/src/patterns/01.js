@@ -34,7 +34,12 @@ const withClapAnimation = WrappedComponent => {
         opacity: {0:1},
         y: {0: -30},
         duration: tlDuration
-      })
+      }).then({
+        opacity: {1:0},
+        y: -80, 
+        delay: tlDuration/2
+      });
+      
       const countTotalAnimation = new mojs.Html({
         el: '#clapCountTotal',
         opacity: {0: 1},
