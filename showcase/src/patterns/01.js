@@ -29,6 +29,16 @@ const withClapAnimation = WrappedComponent => {
           easing: mojs.easing.ease.out,
       })
 
+      const triangleBurst = new mojs.Burst({
+        parent: '#clap',
+        radius: {50: 95},
+        count: 5,
+        angle: 30,
+        children: {
+          shape: 'polygon',
+          radius: {6: 0}, 
+        }
+      })
       const countAnimation = new mojs.Html({
         el: '#clapCount',
         opacity: {0:1},
@@ -39,7 +49,7 @@ const withClapAnimation = WrappedComponent => {
         y: -80, 
         delay: tlDuration/2
       });
-      
+
       const countTotalAnimation = new mojs.Html({
         el: '#clapCountTotal',
         opacity: {0: 1},
