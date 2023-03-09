@@ -37,6 +37,13 @@ const withClapAnimation = WrappedComponent => {
         children: {
           shape: 'polygon',
           radius: {6: 0}, 
+          stroke: 'rgb(211,54,0,0.5)',
+          strokeWidth: 2,
+          angle: 210,
+          speed: 0.2, 
+          delay: 30,
+          duration: tlDuration,
+          easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
         }
       })
       const countAnimation = new mojs.Html({
@@ -62,7 +69,7 @@ const withClapAnimation = WrappedComponent => {
       clap.style.transform = 'scale(1,1)'
 
       const newAnimationTimeline = this.animationTimeline.add(
-        [scaleButton, countTotalAnimation, countAnimation])
+        [scaleButton, countTotalAnimation, countAnimation, triangleBurst])
       this.setState({animationTimeline: newAnimationTimeline})
     }
 
