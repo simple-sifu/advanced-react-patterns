@@ -176,14 +176,18 @@ const CountTotal = () => {
   </span>
 }
 
+MediumClap.icon = ClapIcon;
+MediumClap.count = ClapCount;
+MediumClap.total = CountTotal;
+
 /*
  Usage
 */
 const Usage = () => {
   return (<MediumClap>
-    <ClapIcon />
-    <ClapCount />
-    <CountTotal />
+    <MediumClap.icon />
+    <MediumClap.count />
+    <MediumClap.total />
   </MediumClap>
 )}
 
