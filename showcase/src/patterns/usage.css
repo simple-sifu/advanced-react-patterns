@@ -16,7 +16,8 @@
 .clap:hover {
     border: 1px solid #896EAF; 
 }
-
+.icon {
+}
 .cupContainer {
     width: 100px;
     min-height: 100px;
