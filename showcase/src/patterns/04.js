@@ -206,7 +206,7 @@ const Usage = () => {
 
   return (
     <div style={{width: '100%'}}>
-      <MediumClap onClap={handleClap} style={{border: `1px solid red`}}>
+      <MediumClap onClap={handleClap}>
         <MediumClap.icon />
         <MediumClap.count />
         <MediumClap.total />
