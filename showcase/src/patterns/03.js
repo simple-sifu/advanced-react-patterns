@@ -1,4 +1,4 @@
-import React, {Component, useState, useLayoutEffect, useCallback} from 'react';
+import React, {Component, useState, useLayoutEffect, useCallback, createContext} from 'react';
 import styles from './index.css';
 import mojs from 'mo-js';
 
@@ -102,6 +102,7 @@ const useClapAnimation = ({
   return animationTimeline;
 }
 
+
 const MediumClap = () => {
   const MAXIMUM_USER_CLAPS = 50;
   const [clapState, setClapState] = useState(initialState);
@@ -177,7 +178,11 @@ const CountTotal = ({countTotal, setRef}) => {
 const Usage = () => {
   // const AnimatedMediumClap = withClapAnimation(MediumClap);
   // return <AnimatedMediumClap />;
-  return <MediumClap/>
+  return <MediumClap>
+    <ClapIcon />
+    <ClapCount />
+    <CountTotal />
+  </MediumClap>
 }
 
 export default Usage;
