@@ -149,17 +149,24 @@ const MediumClap = ({children, onClap, style: userStyles = {} }) => {
 
   return (
     <MediumClapContext.Provider value={memoizedValue}>
-      <button ref={setRef} data-refkey="clapRef" className={styles.clap} onClick={handleClapClick}>
+      <button 
+        ref={setRef} 
+        data-refkey="clapRef" 
+        className={styles.clap} 
+        onClick={handleClapClick}
+        style={userStyles}
+      >
         {children}
       </button>
     </MediumClapContext.Provider>
   )
 }
 
-const ClapIcon = () => {
+const ClapIcon = ({style:userStyles = {}}) => {
   const { isClicked } = useContext(MediumClapContext);
   return <span>
       <svg
+        style={userStyles}
         className={`${styles.icon} ${isClicked && styles.checked}`}
         xmlns='http://www.w3.org/2000/svg'
         viewBox='-549 338 100.1 125'
@@ -170,16 +177,16 @@ const ClapIcon = () => {
   </span>
 }
 
-const ClapCount = () => {
+const ClapCount = ({style:userStyles = {}}) => {
   const { count, setRef } = useContext(MediumClapContext);
-  return <span ref={setRef} data-refkey='clapCountRef' className={styles.count}>
+  return <span ref={setRef} data-refkey='clapCountRef' className={styles.count} style={userStyles}>
    + {count}
   </span>
 }
 
-const CountTotal = () => {
+const CountTotal = ({style:userStyles = {}}) => {
   const { countTotal, setRef } = useContext(MediumClapContext);
-  return <span ref={setRef} data-refkey='clapTotalRef' className={styles.total}>
+  return <span ref={setRef} data-refkey='clapTotalRef' className={styles.total} style={userStyles}>
     { countTotal }
   </span>
 }
@@ -199,7 +206,7 @@ const Usage = () => {
 
   return (
     <div style={{width: '100%'}}>
-      <MediumClap onClap={handleClap}>
+      <MediumClap onClap={handleClap} style={{border: `1px solid red`}}>
         <MediumClap.icon />
         <MediumClap.count />
         <MediumClap.total />
