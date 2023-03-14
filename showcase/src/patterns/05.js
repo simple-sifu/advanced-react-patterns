@@ -105,7 +105,13 @@ const useClapAnimation = ({
 
 const MediumClapContext = createContext();
 
-const MediumClap = ({children, onClap, style: userStyles = {}, className }) => {
+const MediumClap = ({
+  children, 
+  values = null,
+  onClap, 
+  style: userStyles = {}, 
+  className 
+}) => {
   const MAXIMUM_USER_CLAPS = 50;
   const [clapState, setClapState] = useState(initialState);
 
@@ -127,26 +133,38 @@ const MediumClap = ({children, onClap, style: userStyles = {}, className }) => {
 
   const componentJustMounted = useRef(true);
   useEffect(() => {
-    if (!componentJustMounted.current){
+    if (!componentJustMounted.current && !isControlled){
       onClap && onClap(clapState)
     }
     componentJustMounted.current = false;
-  },[clapState.count])
+  },[clapState.count, onClap, isControlled])
 
+  // is this controlled component?
+  const isControlled = !! values && onClap;
   const handleClapClick = () => {
     animationTimeline.replay();
-    setClapState(prevState => ({
-      isClicked: true,
-      count: Math.min(prevState.count + 1, MAXIMUM_USER_CLAPS),
-      countTotal: prevState.count < MAXIMUM_USER_CLAPS ? prevState.countTotal + 1 :  prevState.countTotal
-    }))
+    isControlled 
+      ? onClap() 
+      : setClapState(prevState => ({
+        isClicked: true,
+        count: Math.min(prevState.count + 1, MAXIMUM_USER_CLAPS),
+        countTotal: prevState.count < MAXIMUM_USER_CLAPS ? prevState.countTotal + 1 :  prevState.countTotal
+      }))
+
   }
 
+  const getState = useCallback( () => isControlled ? values : clapState, [
+    isControlled,
+    values,
+    clapState
+  ]);
 
-  const memoizedValue = useMemo(() => ({
-    ...clapState,
-    setRef,
-  }),[clapState, setRef]);
+  const memoizedValue = useMemo(
+    () => ({
+      ...getState(),
+      setRef,
+    }),[getState, setRef]
+  );
 
   const classNames = [styles.clap, className].join(' ').trim();
 
